@@ -6,7 +6,7 @@ var xBoard = 0,
     xField = 80,
     yField = 80;
 var colors = [
-		"red",
+	"red",
     "#ef4f43",
     "#ff5900",
     "#ffd900",

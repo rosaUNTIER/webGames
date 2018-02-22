@@ -49,26 +49,30 @@ var red = new fieldBoard("#ff0000",5,8,19,30,33,44,55,58);
 var green = new fieldBoard("#008000",6,11,16,29,34,47,52,57);
 var brown = new fieldBoard("#521515",7,14,21,28,35,42,49,56);
 */
-for(j = 0; j < 8; j++){
-for (k = 0; k < 8; k++){
-//for (i = 0; i < 8; i++){
-var xBoard = 0,
-yBoard = 0,
-xField = 80,
-yField = 80,
-pos = 80;
-xPos = 0;
-ctx.beginPath();
-if (xPos+inkr[j%4] > 7){
-xPos += inkr[j%4]-7;
-}
-else{
-	xPos += inkr[j%4];
-}
-ctx.rect(xPos*pos, k*pos, xField, yField);
-var color = colors[j];
-ctx.fillStyle = color;
-ctx.fill();
-//}
-}
+var xPos = 0;
+		var xBoard = 0,
+		yBoard = 0,
+		xField = 80,
+		yField = 80,
+		pos = 80;
+for(j = 0; j <= 7; j++){
+	xPos = j;
+	for (k = 0; k <= 7; k++){
+		
+		ctx.beginPath();
+		ctx.rect(xPos*pos, k*pos, xField, yField);
+		var color = colors[j];
+		ctx.fillStyle = color;
+		ctx.fill();
+		
+		if (xPos+inkr[j%4] > 7){
+			xPos += inkr[j%4] - 8;
+		}
+		else if (xPos+inkr[j%4]<0){
+			xPos += inkr[j%4] + 8;
+		}
+		else{
+			xPos += inkr[j%4];
+		}
+	}
 }

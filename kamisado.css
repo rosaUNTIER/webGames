@@ -1,1 +1,8 @@
-
+body {
+    background-color: lightblue;
+    z-index: -1;
+}
+#board{
+  margin: auto;
+  display: block;
+}

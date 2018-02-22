@@ -1,5 +1,5 @@
-board = getElementById("board");
-ctx = board.getContext("2d");
+var board = getElementById("board");
+var ctx = board.getContext("2d");
 
 var xBoard = 0,
 		yBoard = 0,

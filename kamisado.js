@@ -1,4 +1,4 @@
-var board = getElementById("board");
+var board = document.getElementById("board");
 var ctx = board.getContext("2d");
 
 var xBoard = 0,

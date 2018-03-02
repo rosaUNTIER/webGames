@@ -17,7 +17,6 @@ for(j = 0; j <= 7; j++){
 if (j%2 == 0){
   	ctx.beginPath();
   	ctx.rect(xPos*, k*pos, FIELD, FIELD);
-		var color = colors[0];
-		ctx.fillStyle = color;
-		ctx.fill();
+	ctx.fillStyle("#000000");
+	ctx.fill();
 }

@@ -1,7 +1,5 @@
 var board = document.getElementById('chess');
 var ctx = board.getContext('2d');
-var board = document.getElementById('board');
-var ctx = board.getContext('2d');
 
 //how big is one field in pixels
 const FIELD = 80;

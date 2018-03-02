@@ -5,4 +5,5 @@ body {
 #board{
   margin: auto;
   display: block;
+  background: grey;
 }

@@ -13,10 +13,8 @@ var xPos = 0,
     yPos = 0,
     
 //circling through the field
-for(j = 0; j <= 7; j++){
-if (j%2 == 0){
-  	ctx.beginPath();
-  	ctx.rect(xPos*, k*pos, FIELD, FIELD);
-	ctx.fillStyle("#000000");
-	ctx.fill();
-}
+ctx.beginPath();
+ctx.rect(0, 0, FIELD, FIELD);
+ctx.fillStyle"#000000";
+ctx.fill();
+

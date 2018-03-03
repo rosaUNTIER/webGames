@@ -9,4 +9,5 @@ body {
 #chess{
   margin: auto;
   display: block;
+  padding-top: 25px;
 }

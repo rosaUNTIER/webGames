@@ -3,10 +3,6 @@ var ctx = board.getContext('2d');
 
 //how big is one field in pixels
 const FIELD = 80;
-//where those fields are
-var xPos = 0,
-    yPos = 0;
-
 var color = [
 	"#000000",	//black
 	"#FFFFFF"	//white

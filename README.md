@@ -1,11 +1,11 @@
-# webGames
+## webGames
 [webGames](https://rosauntier.github.io/webGames/)
 
 rosaUntier messing with html, js & css
 no libraries
 
 
-MIT License
+### MIT License
 
 Copyright (c) 2018 rosaUntier
 

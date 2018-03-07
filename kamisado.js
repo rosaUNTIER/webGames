@@ -76,3 +76,13 @@ for(j = 0; j <= 7; j++){
 		}
 	}
 }
+
+var storeX = 0; 
+var storeY = 0; 
+function getCoordinates(xy) {
+    var x = xy.offsetX;
+    var y = xy.offsetY;
+    storeX = x;
+    storeY = y;
+    console.log("x coords: " + storeX + ", y coords: " + storeY);
+}

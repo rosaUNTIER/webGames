@@ -1,0 +1,6 @@
+# windows thumbs
+*.db
+
+# blender backups
+*.blend1
+*.blend2

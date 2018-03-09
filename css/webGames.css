@@ -2,6 +2,9 @@ body {
     background-color: lightblue;
     z-index: -1;
 }
+#printXY{
+ text-align: center;
+}
 #board{
   margin: auto;
   display: block;
@@ -11,3 +14,4 @@ body {
   display: block;
   padding-top: 25px;
 }
+

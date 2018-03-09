@@ -1,3 +1,4 @@
+
 var board = document.getElementById('board');
 var ctx = board.getContext('2d');
 
@@ -76,3 +77,15 @@ for(j = 0; j <= 7; j++){
 		}
 	}
 }
+
+var storeX = 0; 
+var storeY = 0; 
+function getCoordinates(event) {
+    var x = event.offsetX;
+    var y = event.offsetY;
+    storeX = x;
+    storeY = y;
+    console.log("x coords: " + storeX + ", y coords: " + storeY);
+    document.getElementById("printXY").innerHTML = "x coords: " + storeX + ", y coords: " + storeY;
+}
+

@@ -1,5 +1,5 @@
 body {
-    background: url("bg.png");
+    background: url("https://rosauntier.github.io/webGames/grafics/bg.png");
 }
 #printXY{
  text-align: center;
@@ -7,13 +7,8 @@ body {
 #board{
   margin: auto;
   display: block;
-}
-#chess{
-  margin: auto;
-  display: block;
   padding-top: 25px;
 }
-
 
 /*Menu*/
 ul {
@@ -36,7 +31,6 @@ li a {
     text-decoration: none;
 }
 
-/* Change the link color to #111 (black) on hover */
 li a:hover {
-    background-color: #111;
+    background-color: black;
 }

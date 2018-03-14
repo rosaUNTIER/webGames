@@ -1,4 +1,4 @@
-var board = document.getElementById('chess');
+var board = document.getElementById('board');
 var ctx = board.getContext('2d');
 
 //how big is one field in pixels
@@ -30,8 +30,21 @@ for (j=0; j<8; j++){
 }
 
 pieces = new Image();
-pieces.src = 'chess.png';
+pieces.src = 'chess/chess.png';
 ctx.drawImage(pieces, 0, 64, 64, 83, 10, 10, 60, 60);
 ctx.drawImage(pieces, 84, 64, 86, 83, 90, 10, 60, 60);
+
+var storeX = 0; 
+var storeY = 0; 
+function getCoordinates(event) {
+    var x = event.offsetX;
+    var y = event.offsetY;
+    storeX = x;
+    storeY = y;
+    console.log("x coords: " + storeX + ", y coords: " + storeY);
+    document.getElementById("printXY").innerHTML = "x coords: " + storeX + ", y coords: " + storeY;
+}
+
+
 
 

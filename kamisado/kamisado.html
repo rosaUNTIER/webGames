@@ -3,9 +3,9 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Kamisado</title>
-	<link rel="stylesheet" type="text/css" href="css/webGames.css">
-</head>
+	<link rel="stylesheet" type="text/css" href="kamisado.css">
 
+</head>
 <body>
 
 <nav class="nav">
@@ -14,6 +14,11 @@
     <li class="menu-item"><a href="kamisado/kamisado.html">Kamisado</a></li>
   </ul>
 </nav>
+
+
+<p id="printXY">Click on Canvas for X and Y values</p>
+<canvas id="board" width="640" height="640" onclick="getCoordinates(event)"></canvas>
+<script src="kamisado.js"></script> 
 
 </body>
 </html>

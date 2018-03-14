@@ -4,11 +4,8 @@ body {
 #printXY{
  text-align: center;
 }
+
 #board{
-  margin: auto;
-  display: block;
-}
-#chess{
   margin: auto;
   display: block;
   padding-top: 25px;

@@ -5,7 +5,7 @@ body {
  text-align: center;
 }
 
-#chess{
+#board{
   margin: auto;
   display: block;
   padding-top: 25px;

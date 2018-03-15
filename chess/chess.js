@@ -30,7 +30,7 @@ for (j=0; j<8; j++){
 }
 
 pieces = new Image();
-pieces.src = 'chess/chess.png';
+pieces.src = 'https://rosauntier.github.io/webGames/grafics/chess/chess.png';
 ctx.drawImage(pieces, 0, 64, 64, 83, 10, 10, 60, 60);
 ctx.drawImage(pieces, 84, 64, 86, 83, 90, 10, 60, 60);
 

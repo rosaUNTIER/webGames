@@ -1,70 +1,141 @@
+var COLORS = {
+	orange: "#ffa500",
+	blue: "#0000ff",
+	violet: "#934b93",
+	pink: "#f3a7f3",
+	yellow: "#ffff00",
+	red: "#ff0000",
+	green: "#008000",
+	brown: "#521515"}
 
-var board = document.getElementById('board');
-var ctx = board.getContext('2d');
+var row_0 = [
+	COLORS.orange,
+	COLORS.blue,
+	COLORS.violet,
+	COLORS.pink,
+	COLORS.yellow,
+	COLORS.red,
+	COLORS.green,
+	COLORS.brown]
+var row_1 = [
+	COLORS.red,
+	COLORS.orange,
+	COLORS.pink,
+	COLORS.green,
+	COLORS.blue,
+	COLORS.yellow,
+	COLORS.brown,
+	COLORS.violet]
 
-var orange = "#ffa500";
-var blue = "#0000ff";
-var violett = "#934b93";
-var rosa = "#f3a7f3";
-var yellow = "#ffff00";
-var red = "#ff0000";
-var green = "#008000";
-var brown = "#521515";
+var row_2 = [
+	COLORS.green,
+	COLORS.pink,
+	COLORS.orange,
+	COLORS.red,
+	COLORS.violet,
+	COLORS.brown,
+	COLORS.yellow,
+	COLORS.blue]
+var row_3 = [
+	COLORS.pink,
+	COLORS.violet,
+	COLORS.blue,
+	COLORS.orange,
+	COLORS.brown,
+	COLORS.green,
+	COLORS.red,
+	COLORS.yellow]
+var row_4 = [
+	COLORS.yellow,
+	COLORS.red,
+	COLORS.green,
+	COLORS.brown,
+	COLORS.orange,
+	COLORS.blue,
+	COLORS.violet,
+	COLORS.pink]
+var row_5 = [
+	COLORS.blue,
+	COLORS.yellow,
+	COLORS.brown,
+	COLORS.violet,
+	COLORS.red,
+	COLORS.orange,
+	COLORS.pink,
+	COLORS.green]
+var row_6  = [
+	COLORS.violet,
+	COLORS.brown,
+	COLORS.yellow,
+	COLORS.blue,
+	COLORS.green,
+	COLORS.pink,
+	COLORS.orange,
+	COLORS.red]
+var row_7 = [
+	COLORS.brown,
+	COLORS.green,
+	COLORS.red,
+	COLORS.yellow,
+	COLORS.pink,
+	COLORS.violet,
+	COLORS.blue,
+	COLORS.orange]
 
-var inkr = [
-	1,
-	3,
-	5,
-	-1
-];
+var GameBoard = {};
+GameBoard.colors = [
+	row_0,
+	row_1,
+	row_2,
+	row_3,
+	row_4,
+	row_5,
+	row_6,
+	row_7]
 
-var colors = [
-	orange,
-    blue,
-    violett,
-    rosa,
-    yellow,
-    red,
-    green,
-    brown
-];
+var Player = {
+	white: "#fff",
+	black: "#000"}
+var canvas = document.getElementById('board');
+var ctx = canvas.getContext('2d');
+var scale = 80;
 
-var xPos = 0;
-		var xBoard = 0,
-		yBoard = 0,
-		xField = 80,
-		yField = 80,
-		pos = 80;
-for(j = 0; j <= 7; j++){
-	xPos = j;
-	for (k = 0; k <= 7; k++){
-		
-		ctx.beginPath();
-		ctx.rect(xPos*pos, k*pos, xField, yField);
-		var color = colors[j];
-		ctx.fillStyle = color;
-		ctx.fill();
-		
-		if (xPos+inkr[j%4] > 7){
-			xPos += inkr[j%4] - 8;
-		}
-		else if (xPos+inkr[j%4]<0){
-			xPos += inkr[j%4] + 8;
-		}
-		else{
-			xPos += inkr[j%4];
+function getSquareColor(x, y){
+	return(GameBoard.colors[y][x]);
+}
+
+function drawBoard(){
+	for(y = 0; y < 8; y++){
+		for (x = 0; x <8; x++){
+			ctx.beginPath();
+			ctx.rect(x*scale, y*scale, scale, scale);
+			ctx.fillStyle = getSquareColor(x, y);
+			ctx.fill();
 		}
 	}
 }
-
-var storeX = 0; 
-var storeY = 0; 
-function getCoordinates(event) {
-    var x = event.offsetX;
-    var y = event.offsetY;
-    storeX = x;
-    storeY = y;
-    console.log("x coords: " + storeX + ", y coords: " + storeY);
-    document.getElementById("printXY").innerHTML = "x coords: " + storeX + ", y coords: " + storeY;
+class Piece{
+	constructor(x, y, color, player){
+		this.x = x;
+		this.y = y;
+		this.color = color;
+		this.player = player;
+	}
+	show(){
+		ctx.beginPath();
+		ctx.arc((this.x + 0.5)*scale, (this.y + 0.5)*scale, 35, 0, Math.PI*2);
+		ctx.fillStyle = this.player;
+		ctx.fill();
+		ctx.beginPath();
+		ctx.arc((this.x + 0.5)*scale, (this.y + 0.5)*scale, 30, 0, Math.PI*2);
+		ctx.fillStyle = this.color;
+		ctx.fill();
+	}
 }
 
+var test = new Piece(2,3,COLORS.red, Player.white);
+var test2 = new Piece(2,4,COLORS.brown, Player.black);
+
+drawBoard();
+test.show();
+test2.show();

@@ -9,7 +9,7 @@ var Colors = {
 	brown: "#521515",
 	white: "#fff",
 	black: "#000"}
-var Pieces = {
+var Pieces = {none: 0,
 	wOrange: 1, wBlue: 2, wPurple: 3, wPink: 4, wYellow: 5, wRed: 6, wGreen: 7, wBrown: 8,
 	bOrange: 9, bBlue: 10, bPurple: 11, bwPink: 12, bYellow: 13, bRed: 14, bGreen: 15, bBrown: 16}
 var Squares = {
@@ -128,19 +128,22 @@ var row_9 = [
 	Colors.black,
 	Colors.black,
 	Colors.black]
-	
+
 function getSquareNumber(x, y){
 	return(x + 10*y)
 }
 var canvas = document.getElementById('board');
 var ctx = canvas.getContext('2d');
 var scale = 80;
+
+
 class GameBoard{
 	constructor(){
 		self = this;
 		this.colors = [row_0, row_1, row_2, row_3, row_4, row_5, row_6, row_7, row_8, row_9];
 		this.squares = Array(100);
 		this.pieces = [];
+		this.turn = 0;
 	}
 	show(){
 		for(var x = 0; x < 10; x++){
@@ -156,6 +159,9 @@ class GameBoard{
 		}
 	}
 	reset(){
+		this.turn = 0;
+		this.squares = Array(100);
+		this.pieces = [];
 		for(var x = 0; x < 10; x++){
 			for(var y=0; y < 10; y++){
 				if(y == 0 || x == 0 || y == 9 || x == 9){
@@ -188,17 +194,35 @@ class GameBoard{
 		var y = Math.floor((event.clientY - canvas.offsetTop)/scale);
 		var piece = self.getPiece(x, y);
 		if(piece != 0){
-			
-			piece.lift = true;
+			piece.tmpx = piece.x;
+			piece.tmpy = piece.y;
+			if((self.turn != 0 && piece.active == true) || self.turn == 0){
+				piece.lift = true;
+			}
 		}
 	}
 	mouseUp(){
 		self.pieces.forEach(function(element){
 			if(element.lift == true){
-				canvas.style.cursor = "grab";
-				element.x = Math.floor((event.clientX - canvas.offsetLeft)/scale);
-				element.y = Math.floor((event.clientY - canvas.offsetTop)/scale);
-				element.lift = false;
+				element.show();
+				var x = Math.floor((event.clientX - canvas.offsetLeft)/scale);
+				var y = Math.floor((event.clientY - canvas.offsetTop)/scale);
+				if(self.getPiece(x, y) == Pieces.none && element.movePossible(x, y)){
+					element.x = Math.floor((event.clientX - canvas.offsetLeft)/scale);
+					element.y = Math.floor((event.clientY - canvas.offsetTop)/scale);
+					element.active = false;
+					if((element.player == Colors.black && element.y == 1)
+						|| (element.player == Colors.white && element.y == 8)){
+						self.reset();
+					}else{
+						self.nextTurn(self.getSquareColor(x, y));
+					}
+					
+				}else{
+					element.x = element.tmpx;
+					element.y = element.tmpy;
+				}
+			element.lift = false;
 			}
 		})
 	}
@@ -211,6 +235,17 @@ class GameBoard{
 			}
 		})
 	}
+	nextTurn(color){
+		self.turn += 1;
+		self.pieces.forEach(function(element){
+			if((self.turn % 2 == 0) && (element.color == color) && (element.player == Colors.white)){
+				element.highlight();
+			}
+			if((self.turn % 2 == 1) && (element.color == color) && (element.player == Colors.black)){
+				element.highlight();
+			}
+		})
+	}
 	getSquareColor(x, y){
 		return(this.colors[y][x])
 	}
@@ -219,8 +254,11 @@ class GameBoard{
 class Piece{
 	constructor(x, y, color, player){
 		this.x = x;
+		this.tmpx = x;
 		this.y = y;
+		this.tmpy = y;
 		this.r = 35;
+		this.active = false;
 		this.lift = false;
 		this.color = color;
 		this.player = player;
@@ -235,20 +273,57 @@ class Piece{
 		ctx.arc((this.x + 0.5)*scale, (this.y + 0.5)*scale, this.r-5, 0, Math.PI*2);
 		ctx.fillStyle = this.color;
 		ctx.fill();
+		
+		if(this.active == true){
+			ctx.beginPath();
+			ctx.arc((this.x + 0.5)*scale, (this.y + 0.5)*scale, this.r-20, 0, Math.PI*2);
+			ctx.fillStyle = this.player;
+			ctx.fill();
+		}
+	}
+	highlight(){
+		this.active = true;
+	}
+	movePossible(x,y){
+		var tmp = kamisado.getSquareColor(x, y);
+		if(tmp == Colors.black){
+			return(false)
+		}else if(this.player == Colors.white){
+			if(y > Math.floor(this.tmpy)){
+				if(x == Math.floor(this.tmpx) || Math.abs((x - Math.floor(this.tmpx))) == (y - Math.floor(this.tmpy))){
+					return(true)
+				}else{
+					return(false)
+				}
+			}else{
+				return(false)
+			}
+		}else if(this.player == Colors.black){
+			if(y < Math.floor(this.tmpy)){
+				if(x == Math.floor(this.tmpx) || Math.abs((x - Math.floor(this.tmpx))) == (Math.floor(this.tmpy) - y)){
+					return(true)
+				}else{
+					return(false)
+				}
+			}else{
+				return(false)
+			}
+		}else{
+			return(false)
+		}
 	}
 }
-var colorArray = [Colors.orange,
-]
+
 var kamisado = new GameBoard();
-kamisado.reset();
 canvas.addEventListener("mousedown", kamisado.mouseDown);
 canvas.addEventListener("mouseup", kamisado.mouseUp);
 canvas.addEventListener("mousemove", kamisado.mouseMove);
+
+kamisado.reset();
 
 function draw(){
 	kamisado.show();
 	
 	requestAnimationFrame(draw);
 }
-
 draw();
